@@ -129,7 +129,7 @@ export const Main = () => {
         </div>
         {/*Icono del menú - Cerrar Sesión*/}
         <div className=" hoverable">
-            <NavLink to={"/Login"}>
+            <NavLink to={"/"}>
                 <div className="menu-icon">
                 <span className="material-icons">
                     logout
