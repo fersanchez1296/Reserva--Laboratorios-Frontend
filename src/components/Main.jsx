@@ -1,6 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 export const Main = () => {
+    const [titleWindow,setTitleWindow] = useState();
+    const [whoData,setWhoData] = useState();
+    const [whoApiRequest,setWhoApiRequest] = useState();
     /**
      * Referencia del bbtón menu almacenada en la variable "btnMenu".
      */
@@ -38,7 +41,12 @@ export const Main = () => {
         <section className="menu-overlay is-active" ref={menuOverlay}>
         {/*Icono del menú - Administrar Docente*/}
          <div className="hoverable">
-            <NavLink to={"AdminTeacher"} onClick={showMenu}>
+            <NavLink to={"View"} onClick={()=> {
+                setWhoData(1);
+                setWhoApiRequest("adminTeacher");
+                setTitleWindow("Administrar Docente");
+                showMenu()
+            }}>
                 <div className="menu-icon">
                     <span className="material-icons">
                         school
@@ -51,7 +59,7 @@ export const Main = () => {
         </div>
         {/*Icono del menú - Administrar Usuario*/}
         <div className="hoverable">
-            <NavLink to={"AdminUser"} onClick={showMenu}>
+            
                 <div className="menu-icon">
                     <span className="material-icons">
                         person
@@ -60,11 +68,16 @@ export const Main = () => {
                 <div className="menu-title">
                     <p>Administrar Usuario</p>
                 </div>
-            </NavLink>
+            
         </div>
         {/*Icono del menú - Administrar Materia*/}
         <div className="hoverable">
-            <a href="./adminSubject.html">
+            <NavLink to={"View"} onClick={() => {
+                setWhoData(2);
+                setWhoApiRequest("adminSubjects");
+                setTitleWindow("Administrar Usuario");
+                showMenu();
+            }}>
                 <div className="menu-icon">
                     <span className="material-icons">
                         class
@@ -73,8 +86,9 @@ export const Main = () => {
                 <div className="menu-title">
                     <p>Administrar Materia</p>
                 </div>
-            </a>
+                </NavLink>
         </div>
+        
         {/*Icono del menú - Administrar Material*/}
         <div className=" hoverable">
             <a href="./adminMaterial.html">
@@ -143,7 +157,11 @@ export const Main = () => {
     </section>
         {/*Componente en el cual se despliega toda información y las vistas por encima del botón*/}
         <div className='outlet'>
-            <Outlet/>
+            <Outlet context={{
+                "title" : titleWindow,
+                "whoData" : whoData,
+                "whoApiRequest" : whoApiRequest,
+                }}/>
         </div>
         
 

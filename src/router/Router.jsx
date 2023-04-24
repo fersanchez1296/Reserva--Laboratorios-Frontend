@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter,HashRouter,Route,Routes} from 'react-router-dom';
-import { AdminTeacher } from '../components/subRoutes/AdminTeacher.jsx';
+import { View } from '../components/subRoutes/View.jsx';
 import {Login} from '../components/Login.jsx'
 import { Main } from '../components/Main.jsx';
 import { Create } from '../components/subRoutes/Create.jsx';
@@ -16,7 +16,7 @@ export const Router = () => {
           {/*Componente Main*/}
           <Route path='/Main/*' element={<Main/>}>
             {/*Componente AdminTeacher*/}
-            <Route path='AdminTeacher/' element={<AdminTeacher/>} />
+            <Route path='View/' element={<View />} />
           </Route>
           {/*Componente Crear Usuario*/}
           <Route path='/Create' element={<Create/>} /> 

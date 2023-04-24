@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react'
 import { Filter } from '../Filter'
 import { Table } from '../Table';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useOutletContext } from 'react-router-dom';
 import { useContextReservations } from '../context/Context';
-export const AdminTeacher = () => {
+export const View = () => {
+  const {title,whoData,whoApiRequest} = useOutletContext();
   /**
   * useContextReservation es un hook personalizado creado en el componente "Context".
   * "data" es la información que viene desde el contexto.
@@ -15,8 +16,8 @@ export const AdminTeacher = () => {
   *el componente. 
   */
   useEffect (() => {
-    loadDataRequest();
-  },[])
+    loadDataRequest(whoData,whoApiRequest);
+  },[title])
   /**
   * La función "renderTable" es la que condiciona si la tabla se renderiza, la tabla se
   *despliega siempre y cuando la petición al backend retorne información,caso contrario
@@ -30,7 +31,7 @@ export const AdminTeacher = () => {
     <div>
       {/*Mostramos el titulo de la sección en la que estamos*/}
       <div className='header header-component'>
-          <h1 className='component-title'>Adminitración de Profesores</h1>
+          <h1 className='component-title'>{title}</h1>
       </div>
       {/*Este componente es el encargado de mostrar las acciones para la organización
       y el filtrado de la información de la tabla*/}

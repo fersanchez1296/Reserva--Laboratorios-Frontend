@@ -40,14 +40,31 @@ export const ContextReservationsProvider = ({children}) => {
      *"setInfo" asignamos el contenido de la variable "response.data" a "info".
      *Si la petición es insatisfactoria, mostramos un mensaje de error.
      */
-    const loadDataRequest = async () => {
-        try {
-            const response = await getTeachers();
-            setData(response);
-            setHeaders(Object.keys(response[0]))
-        } 
-        catch (error) {
-            alert(error);
+    const loadDataRequest = async (whoData,whoApiRequest) => {
+        switch (whoData) {
+            case 1:
+                try {
+                    const response = await getTeachers(whoApiRequest);
+                    setData(response);
+                    setHeaders(Object.keys(response[0]))
+                } 
+                catch (error) {
+                    alert(error);
+                }
+                break;
+            case 2:
+                try {
+                    const response = await getTeachers(whoApiRequest);
+                    
+                    setData(response);
+                    setHeaders(Object.keys(response[0]))
+                } 
+                catch (error) {
+                    alert(error);
+               }
+                break;
+            default:
+                break;
         }
     }
     /**

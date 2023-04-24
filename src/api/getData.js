@@ -7,8 +7,9 @@ import axios from 'axios';
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
-export const getTeachers = async() =>{
-    const response = await axios.get("https://reserva-laboratorios-production.up.railway.app/adminTeacher");
+export const getTeachers = async(whoApiRequest) =>{
+    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/${whoApiRequest}`);
+    console.log(response);
     return(response.data);
 }
 /**
