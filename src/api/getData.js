@@ -7,7 +7,7 @@ import axios from 'axios';
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
-export const getTeachers = async(whoApiRequest) =>{
+export const getData = async(whoApiRequest) =>{
     const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/${whoApiRequest}`);
     console.log(response);
     return(response.data);
@@ -24,7 +24,7 @@ export const getTeachers = async(whoApiRequest) =>{
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
- export const getTeacher = async(codigo) =>{
+ export const getSingleData = async(codigo) =>{
     const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/adminTeacher/${codigo}`);
     return(response.data);
 }
@@ -41,7 +41,7 @@ export const getTeachers = async(whoApiRequest) =>{
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
-export const deleteTeacher = async(codigo) => {
+export const deleteData = async(codigo) => {
     const response = await axios.delete(`https://reserva-laboratorios-production.up.railway.app/adminTeacher/${codigo}`);
     if(response.data !== ""){
         return ([response.data[0],response.data[1]]);
@@ -61,7 +61,7 @@ export const deleteTeacher = async(codigo) => {
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
-export const addTeacher = async(data) =>{
+export const createData = async(data) =>{
     const response = await axios.post(`https://reserva-laboratorios-production.up.railway.app/adminTeacher`,data);
     if(response.data !== ""){
         return [response.data.message,response.data.errno]
@@ -83,7 +83,7 @@ export const addTeacher = async(data) =>{
  * a través de los campos del mismo formulario.
  * @returns 
  */
-export const updateTeacher = async(codigo,newData) =>{
+export const updateData = async(codigo,newData) =>{
     const response = await axios.put(`https://reserva-laboratorios-production.up.railway.app/adminTeacher/${codigo}`,newData);
     console.log(response);
     if(response.data !== ""){

@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 export const Main = () => {
     const [titleWindow,setTitleWindow] = useState();
-    const [whoData,setWhoData] = useState();
-    const [whoApiRequest,setWhoApiRequest] = useState();
+    const [whichData,setWhichData] = useState();
+    const [whichApiRequest,setWhichApiRequest] = useState();
     /**
-     * Referencia del bbtón menu almacenada en la variable "btnMenu".
+     * Referencia del botón menu almacenada en la variable "btnMenu".
      */
     const btnMenu = useRef();
     /**
@@ -42,8 +42,8 @@ export const Main = () => {
         {/*Icono del menú - Administrar Docente*/}
          <div className="hoverable">
             <NavLink to={"View"} onClick={()=> {
-                setWhoData(1);
-                setWhoApiRequest("adminTeacher");
+                setWhichData(1);
+                setWhichApiRequest("adminTeacher");
                 setTitleWindow("Administrar Docente");
                 showMenu()
             }}>
@@ -73,8 +73,8 @@ export const Main = () => {
         {/*Icono del menú - Administrar Materia*/}
         <div className="hoverable">
             <NavLink to={"View"} onClick={() => {
-                setWhoData(2);
-                setWhoApiRequest("adminSubjects");
+                setWhichData(2);
+                setWhichApiRequest("adminSubjects");
                 setTitleWindow("Administrar Usuario");
                 showMenu();
             }}>
@@ -159,8 +159,8 @@ export const Main = () => {
         <div className='outlet'>
             <Outlet context={{
                 "title" : titleWindow,
-                "whoData" : whoData,
-                "whoApiRequest" : whoApiRequest,
+                "whichData" : whichData,
+                "whichApiRequest" : whichApiRequest,
                 }}/>
         </div>
         

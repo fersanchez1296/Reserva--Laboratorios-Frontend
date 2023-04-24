@@ -4,7 +4,7 @@ import { Table } from '../Table';
 import { NavLink,useOutletContext } from 'react-router-dom';
 import { useContextReservations } from '../context/Context';
 export const View = () => {
-  const {title,whoData,whoApiRequest} = useOutletContext();
+  const {title,whichData,whichApiRequest} = useOutletContext();
   /**
   * useContextReservation es un hook personalizado creado en el componente "Context".
   * "data" es la información que viene desde el contexto.
@@ -16,7 +16,7 @@ export const View = () => {
   *el componente. 
   */
   useEffect (() => {
-    loadDataRequest(whoData,whoApiRequest);
+    loadDataRequest(whichData,whichApiRequest);
   },[title])
   /**
   * La función "renderTable" es la que condiciona si la tabla se renderiza, la tabla se

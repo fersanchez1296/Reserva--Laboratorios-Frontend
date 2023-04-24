@@ -1,6 +1,6 @@
 import React, { useContext,useEffect,useState } from 'react'
 import { createContext } from 'react'
-import { getTeachers,deleteTeacher,addTeacher,getTeacher,updateTeacher} from '../../api/getData.js'
+import { getData,deleteData,createData,getSingleData,updateData} from '../../api/getData.js'
 /*adminUserContext es el encargado de permitir la comunicación*/
 export const contextReservations = createContext()
 export const useContextReservations = () => {
@@ -44,7 +44,7 @@ export const ContextReservationsProvider = ({children}) => {
         switch (whoData) {
             case 1:
                 try {
-                    const response = await getTeachers(whoApiRequest);
+                    const response = await getData(whoApiRequest);
                     setData(response);
                     setHeaders(Object.keys(response[0]))
                 } 
@@ -54,7 +54,7 @@ export const ContextReservationsProvider = ({children}) => {
                 break;
             case 2:
                 try {
-                    const response = await getTeachers(whoApiRequest);
+                    const response = await getData(whoApiRequest);
                     
                     setData(response);
                     setHeaders(Object.keys(response[0]))
@@ -84,7 +84,7 @@ export const ContextReservationsProvider = ({children}) => {
      */
     const deleteDataRequest = async(codigo) => {
         try {
-            const response = await deleteTeacher(codigo);
+            const response = await deleteData(codigo);
             if(response[1] !== 200){
                 M.toast({html: response[0], classes: 'rounded red'});
             }else{
@@ -107,7 +107,7 @@ export const ContextReservationsProvider = ({children}) => {
      */
     const createDataRequest = async(values) => {
         try {
-            const response = await addTeacher(values);
+            const response = await createData(values);
             if(response[1] !== 200){
                 M.toast({html: response[0], classes: 'rounded red'});
             }else{
@@ -134,7 +134,7 @@ export const ContextReservationsProvider = ({children}) => {
      */
     const loadSingleDataRequest = async (codigo) => {
         try {
-            const response = await getTeacher(codigo)
+            const response = await getSingleData(codigo)
             return response;
         } catch (error) {   
             console.log(error)
@@ -156,7 +156,7 @@ export const ContextReservationsProvider = ({children}) => {
      */
     const updateSingleDataRequest = async (codigo,newData) => {
         try {
-            const response = await updateTeacher(codigo,newData);
+            const response = await updateData(codigo,newData);
             if(response[1] !== 200){
                 M.toast({html: response[0], classes: 'rounded red'});
             }else{
