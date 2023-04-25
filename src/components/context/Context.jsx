@@ -51,7 +51,7 @@ export const ContextReservationsProvider = ({children}) => {
                 catch (error) {
                     alert(error);
                 }
-                break;
+            break;
             case 2:
                 try {
                     const response = await getData(whoApiRequest);
@@ -62,9 +62,39 @@ export const ContextReservationsProvider = ({children}) => {
                 catch (error) {
                     alert(error);
                }
-                break;
+            break;
+            case 3:
+                try {
+                    const response = await getData(whoApiRequest);
+                    setData(response);
+                    setHeaders(Object.keys(response[0]))
+                } 
+                catch (error) {
+                    alert(error);
+                }
+            break;
+            case 4:
+                try {
+                    const response = await getData(whoApiRequest);
+                    setData(response);
+                    setHeaders(Object.keys(response[0]))
+                } 
+                catch (error) {
+                    alert(error);
+                }
+            break;
+            case 6:
+                try {
+                    const response = await getData(whoApiRequest);
+                    setData(response);
+                    setHeaders(Object.keys(response[0]))
+                } 
+                catch (error) {
+                    alert(error);
+                }
+            break;
             default:
-                break;
+            break;
         }
     }
     /**

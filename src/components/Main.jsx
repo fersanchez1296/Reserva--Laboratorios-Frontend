@@ -59,7 +59,12 @@ export const Main = () => {
         </div>
         {/*Icono del menú - Administrar Usuario*/}
         <div className="hoverable">
-            
+            <NavLink to={"View"} onClick={()=> {
+                setWhichData(2);
+                setWhichApiRequest("adminUsers");
+                setTitleWindow("Administrar Usuario");
+                showMenu()
+            }}>
                 <div className="menu-icon">
                     <span className="material-icons">
                         person
@@ -68,14 +73,14 @@ export const Main = () => {
                 <div className="menu-title">
                     <p>Administrar Usuario</p>
                 </div>
-            
+            </NavLink>
         </div>
         {/*Icono del menú - Administrar Materia*/}
         <div className="hoverable">
             <NavLink to={"View"} onClick={() => {
-                setWhichData(2);
+                setWhichData(3);
                 setWhichApiRequest("adminSubjects");
-                setTitleWindow("Administrar Usuario");
+                setTitleWindow("Administrar Materias");
                 showMenu();
             }}>
                 <div className="menu-icon">
@@ -86,21 +91,26 @@ export const Main = () => {
                 <div className="menu-title">
                     <p>Administrar Materia</p>
                 </div>
-                </NavLink>
+            </NavLink>
         </div>
         
         {/*Icono del menú - Administrar Material*/}
         <div className=" hoverable">
-            <a href="./adminMaterial.html">
+            <NavLink to={"View"} onClick={() => {
+                    setWhichData(4);
+                    setWhichApiRequest("adminTools");
+                    setTitleWindow("Administrar Equipo");
+                    showMenu();
+                }}>
                 <div className="menu-icon">
                     <span className="material-icons">
                         home_repair_service
                     </span>
                 </div>
                 <div className="menu-title">
-                    <p>Administrar Material</p>
+                    <p>Administrar Equipo</p>
                 </div>
-            </a>
+            </NavLink>
         </div>
         {/*Icono del menú - Administrar Práctica*/}
         <div className=" hoverable">
@@ -117,16 +127,21 @@ export const Main = () => {
         </div>
         {/*Icono del menú - Administrar Laboratorio*/}
         <div className=" hoverable">
-            <a href="./adminLab.html">
+            <NavLink to={"View"} onClick={() => {
+                        setWhichData(6);
+                        setWhichApiRequest("adminLabs");
+                        setTitleWindow("Administrar Laboratórios");
+                        showMenu();
+                    }}>
                 <div className="menu-icon">
                     <span className="material-icons">
                         science
                     </span>
                 </div>
-                <div className="menu-title">
+                <div className="menu-title">    
                     <p>Administrar Lab</p>
                 </div>
-            </a>
+            </NavLink>
         </div>
         {/*Icono del menú - Administrar Reserva*/}
         <div className=" hoverable">
