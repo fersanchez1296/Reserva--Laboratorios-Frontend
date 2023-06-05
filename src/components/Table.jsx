@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useContextReservations } from './context/Context.jsx';
 import Button from '@mui/material/Button';
@@ -13,7 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle';
  * desde el componente invocador "AdminTeacher".
  * @returns 
  */
-export const Table = ({headers,data}) => {
+export const Table = ({headers,data,whichData}) => {
   /**
    * Hook personalizado relacionado con la adminitración de usuarios.
    * "deleteDataRequest" es la función declara en el componente "Context"
@@ -28,10 +28,10 @@ export const Table = ({headers,data}) => {
   const [open, setOpen] = useState(false);
   /**
    * "codigo" es el codigo del usuario del cual se quiere eliminar de la base de datos.
-   * Mediante "setCodigo" asignamos el codigo del usuario que se quiere eliminar a la 
+   * Mediante "setItemDelete" asignamos el codigo del usuario que se quiere eliminar a la 
    * variable "codigo".
    */
-  const [codigo,setCodigo] = useState(undefined);
+  const [itemDelete,setItemDelete] = useState(undefined);
   /**
    * "navigate" utiliza el hook "useNavigate" para redirijir a otra ruta del sitio.
    */
@@ -48,6 +48,19 @@ export const Table = ({headers,data}) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const edit = (itemEdit) => {
+    switch (whichData) {
+      case 1:
+        navigate(`/Edit/Teacher/${itemEdit}`)
+      break;
+      case 4:
+        navigate(`/Edit/Tool/${itemEdit}`)
+      break;
+      default:
+        break;
+    }
+  }
   return(
     <>
     {/*Tabla donde se despliega la información referente a los usuarios*/}
@@ -68,11 +81,12 @@ export const Table = ({headers,data}) => {
               "data"*/}
               {data.map(row => {
                 return(
-                  <tr key={row.codigo}>
+                  <tr key={Object.values(row)[0]}> 
                     {Object.values(row).map((value,index) => {
                       return (
                       <td key={index}>{value}</td>
                       )
+                      
                     })}
                   <td>
                     {/*Botones para editar y eliminar */}
@@ -85,11 +99,11 @@ export const Table = ({headers,data}) => {
                         *relacionada con este usuario. 
                         */}
                         <button className="btn-edit"
-                        onClick={() => navigate(`/Edit/${row.codigo}`)}><span className="material-icons">edit</span>Editar</button>
+                        onClick={() => edit(Object.values(row)[0])}><span className="material-icons">edit</span>Editar</button>
                         {/*
                         *El botón eliminar mediante su metodo "onClick" manda a llamar el dialogo
                         *de confirmación y asigna el codigo del usuario que se quiere eliminar
-                        *mediante el metodo "setCodigo()".
+                        *mediante el metodo "setItemDelete()".
                         *Se envia como parametro el codigo del usuario que se desea editar para con este
                         *dato realizar una petición al backend y obtener toda la información
                         *relacionada con este usuario. 
@@ -101,7 +115,7 @@ export const Table = ({headers,data}) => {
                         {/*Asignación del codigo del usuario que se quiere eliminar
                         *en la variable codigo*
                         */}
-                        setCodigo(row.codigo)}}
+                        setItemDelete(Object.values(row)[0])}}
                         ><span className="material-icons">delete</span>Eliminar</button>
                     </div>
                   </td>
@@ -133,7 +147,7 @@ export const Table = ({headers,data}) => {
                   {/*Confirmar eliminación*/}
                   <Button onClick={() => {
                     {/*Petición al backend*/}
-                    deleteDataRequest(codigo)
+                    deleteDataRequest(itemDelete)
                     {/*Cerrar dialogo*/}
                     handleClose()}}>Aceptar</Button>
                 </DialogActions>

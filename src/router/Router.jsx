@@ -1,9 +1,10 @@
 import React from 'react';
 import {BrowserRouter,HashRouter,Route,Routes} from 'react-router-dom';
 import { View } from '../components/subRoutes/View.jsx';
-import {Login} from '../components/Login.jsx'
+import {Login} from '../components/Login.jsx';
 import { Main } from '../components/Main.jsx';
 import { Create } from '../components/subRoutes/Create.jsx';
+import {CreateTools} from '../components/CreateTools.jsx';
 import { ContextReservationsProvider } from '../components/context/Context.jsx';
 
 export const Router = () => {
@@ -16,12 +17,17 @@ export const Router = () => {
           {/*Componente Main*/}
           <Route path='/Main/*' element={<Main/>}>
             {/*Componente AdminTeacher*/}
-            <Route path='View/' element={<View />} />
+            <Route path='View' element={<View />} /> 
           </Route>
-          {/*Componente Crear Usuario*/}
-          <Route path='/Create' element={<Create/>} /> 
+          {/*Componente Crear Usuario*/} 
+          <Route path='/Create/Teacher' element={<Create/>} /> 
           {/*Componente Editar usuario*/}
-          <Route path='/Edit/:codigo' element={<Create/>} />   
+          <Route path='/Edit/Teacher/:codigo' element={<Create/>} />  
+          {/*Componente Crear Equipo*/} 
+          <Route path='/Create/Tools' element={<CreateTools/>} /> 
+          {/*Componente Editar equipo*/}
+          <Route path='/Edit/Tool/:id' element={<CreateTools/>} />  
+            
         </Routes>
       </HashRouter>
     </ContextReservationsProvider>

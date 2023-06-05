@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react'
+import React, {Component, useEffect} from 'react'
 import { Filter } from '../Filter'
 import { Table } from '../Table';
-import { NavLink,useOutletContext } from 'react-router-dom';
+import { useOutletContext,useNavigate } from 'react-router-dom';
 import { useContextReservations } from '../context/Context';
 export const View = () => {
+  const navigate = useNavigate()
   const {title,whichData,whichApiRequest} = useOutletContext();
   /**
   * useContextReservation es un hook personalizado creado en el componente "Context".
@@ -17,7 +18,7 @@ export const View = () => {
   */
   useEffect (() => {
     loadDataRequest(whichData,whichApiRequest);
-  },[title])
+  },[title])  
   /**
   * La función "renderTable" es la que condiciona si la tabla se renderiza, la tabla se
   *despliega siempre y cuando la petición al backend retorne información,caso contrario
@@ -25,7 +26,20 @@ export const View = () => {
   * @returns 
   */
   function renderTable(){
-    if (data.length === 0){return <h1>No hay información aún</h1>} else{return <Table data={data} headers={headers}/>}
+    if (data.length === 0){return <h1>No hay información aún</h1>} else{return <Table data={data} headers={headers} whichData={whichData}/>}
+  }
+
+  const redirect = (where) => {
+    switch (where) {
+      case 1:
+          navigate('/Create/Teacher');
+        break;
+        case 4:
+          navigate("/Create/Tools");
+        break;
+      default:
+        break;
+    }
   }
   return (
     <div>
@@ -41,16 +55,14 @@ export const View = () => {
       {/*Mostramos un botón para agregar un nuevo usuario, al presionarlo nos redirije
         a un formulario en el cual ingresamos los datos solicitados*/}
       <div className="btn-add">
-        <NavLink to={"/Create"}>
-          <button className='btn-floating btn-large waves-effect waves-light blue'>
-            <span className="material-icons">
-              add
-            </span>
-          </button>
-        </NavLink>
+              <button className='btn-floating btn-large waves-effect waves-light blue'
+              onClick={() => redirect(whichData)}>
+                <span className="material-icons">
+                  add
+                </span>
+              </button>
+            
       </div>
     </div>
-
-    
   )
 }

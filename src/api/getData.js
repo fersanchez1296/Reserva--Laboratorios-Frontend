@@ -7,9 +7,8 @@ import axios from 'axios';
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
-export const getData = async(whoApiRequest) =>{
-    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/${whoApiRequest}`);
-    console.log(response);
+export const getData = async(whichApiRequest) =>{
+    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/${whichApiRequest}`);
     return(response.data);
 }
 /**
@@ -24,8 +23,8 @@ export const getData = async(whoApiRequest) =>{
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
- export const getSingleData = async(codigo) =>{
-    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/adminTeacher/${codigo}`);
+ export const getSingleData = async(item,whichApiRequest) =>{
+    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/${whichApiRequest}/${item}`);
     return(response.data);
 }
 /**
@@ -61,12 +60,12 @@ export const deleteData = async(codigo) => {
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
-export const createData = async(data) =>{
-    const response = await axios.post(`https://reserva-laboratorios-production.up.railway.app/adminTeacher`,data);
+export const createData = async(data,whichApiRequest) =>{
+    const response = await axios.post(`https://reserva-laboratorios-production.up.railway.app/${whichApiRequest}`,data);
     if(response.data !== ""){
         return [response.data.message,response.data.errno]
     }else{
-        return (["Usuario agregado con exito",200]);
+        return (["Información agregada con exito",200]);
     }
 }
 /**
@@ -83,12 +82,11 @@ export const createData = async(data) =>{
  * a través de los campos del mismo formulario.
  * @returns 
  */
-export const updateData = async(codigo,newData) =>{
-    const response = await axios.put(`https://reserva-laboratorios-production.up.railway.app/adminTeacher/${codigo}`,newData);
-    console.log(response);
+export const updateData = async(codigo,newData,whichApiRequest) =>{
+    const response = await axios.put(`https://reserva-laboratorios-production.up.railway.app/${whichApiRequest}/${codigo}`,newData);
     if(response.data !== ""){
         return ([response.data[0],response.data[1]]);
     }else{
-        return (["Usuario modificado con exito",200]);
+        return (["Información modificada con exito",200]);
     }
 }

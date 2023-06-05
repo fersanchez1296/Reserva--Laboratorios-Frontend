@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useRef, useState } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import bg_logo from '../assets/logos/bg_logo.png';
 export const Main = () => {
     const [titleWindow,setTitleWindow] = useState();
     const [whichData,setWhichData] = useState();
@@ -114,7 +115,12 @@ export const Main = () => {
         </div>
         {/*Icono del menú - Administrar Práctica*/}
         <div className=" hoverable">
-            <a href="./adminPractice.html">
+            <NavLink to={"View"} onClick={() => {
+                        setWhichData(5);
+                        setWhichApiRequest("adminPractices");
+                        setTitleWindow("Administrar Prácticas");
+                        showMenu();
+            }}>
                 <div className="menu-icon">
                     <span className="material-icons">
                         square_foot
@@ -123,7 +129,7 @@ export const Main = () => {
                 <div className="menu-title">
                     <p>Administrar Práctica</p>
                 </div>
-            </a>
+            </NavLink>
         </div>
         {/*Icono del menú - Administrar Laboratorio*/}
         <div className=" hoverable">
@@ -171,13 +177,13 @@ export const Main = () => {
         </div>
     </section>
         {/*Componente en el cual se despliega toda información y las vistas por encima del botón*/}
-        <div className='outlet'>
-            <Outlet context={{
+    <div className='outlet'>
+        <Outlet context={{
                 "title" : titleWindow,
                 "whichData" : whichData,
                 "whichApiRequest" : whichApiRequest,
                 }}/>
-        </div>
+    </div>
         
 
     </div>

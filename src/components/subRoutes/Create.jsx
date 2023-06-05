@@ -35,6 +35,7 @@ export const Create = () => {
             }   
         };
         loadData();
+        
     },[])
 
 //TODO: Crear validaciones para los campos del formulario.
@@ -49,11 +50,11 @@ export const Create = () => {
         onSubmit={async(values,actions) => {
             if(params.codigo){
                 await updateSingleDataRequest(params.codigo,values);
-                navigate("/Main/AdminTeacher");
+                navigate("/Main/");
             }
             else{
-                await createDataRequest(values);
-                navigate("/Main/AdminTeacher");
+                await createDataRequest(1,values,"adminTeacher");
+                navigate("/Main/");
             }
             setData({
                 rol_id : "",
@@ -139,7 +140,7 @@ export const Create = () => {
                         <ErrorMessage name="password" component="div" />    
                     </div> 
                     {/*Redirecciona al componente "AdminTeacher"*/} 
-                    <NavLink to="/Main/AdminTeacher">
+                    <NavLink to="/Main/">
                         <div className="input-field col s6">
                             <button className='btn-small red'>
                                 Cancelar

@@ -83,6 +83,16 @@ export const ContextReservationsProvider = ({children}) => {
                     alert(error);
                 }
             break;
+            case 5:
+                try {
+                    const response = await getData(whoApiRequest);
+                    setData(response);
+                    setHeaders(Object.keys(response[0]))
+                } 
+                catch (error) {
+                    alert(error);
+                }
+            break;
             case 6:
                 try {
                     const response = await getData(whoApiRequest);
@@ -135,17 +145,36 @@ export const ContextReservationsProvider = ({children}) => {
      * El parametro "values" es toda la información ingresada en el componente "Create"
      * y que está relacionada con el nuevo usuario.
      */
-    const createDataRequest = async(values) => {
-        try {
-            const response = await createData(values);
-            if(response[1] !== 200){
-                M.toast({html: response[0], classes: 'rounded red'});
-            }else{
-                M.toast({html: "Usuario agregado con exito", classes: 'rounded green'});
-            }   
-        }
-        catch(error){
-            console.log(error);
+    const createDataRequest = async(whoData,values,whichApiRequest) => {
+        switch (whoData) {
+            case 1:
+                try {
+                    const response = await createData(values,whichApiRequest);
+                    if(response[1] !== 200){
+                        M.toast({html: response[0], classes: 'rounded red'});
+                    }else{
+                        M.toast({html: "Usuario agregado con exito", classes: 'rounded green'});
+                    }   
+                }
+                catch(error){
+                    console.log(error);
+                }
+                break;
+            case 4:
+                try {
+                    const response = await createData(values,whichApiRequest);
+                    if(response[1] !== 200){
+                        M.toast({html: response[0], classes: 'rounded red'});
+                    }else{
+                        M.toast({html: "Usuario agregado con exito", classes: 'rounded green'});
+                    }   
+                    }
+                    catch(error){
+                        console.log(error);
+                    }
+                    break;
+            default:
+                break;
         }
     }
     /**
@@ -162,9 +191,9 @@ export const ContextReservationsProvider = ({children}) => {
      * El valor de retorno es la informacion almacenada
      * en la variable response que corresponda con el codigo de usuario proporcionado.
      */
-    const loadSingleDataRequest = async (codigo) => {
+    const loadSingleDataRequest = async (item,whichApiRequest) => {
         try {
-            const response = await getSingleData(codigo)
+            const response = await getSingleData(item,whichApiRequest);
             return response;
         } catch (error) {   
             console.log(error)
@@ -184,14 +213,17 @@ export const ContextReservationsProvider = ({children}) => {
      * El parametro "newData" es la nueva información del usuario que fue editada
      * en el componente "Create".
      */
-    const updateSingleDataRequest = async (codigo,newData) => {
+    const updateSingleDataRequest = async (codigo,newData,whichApiRequest) => {
         try {
-            const response = await updateData(codigo,newData);
+            console.log(codigo,newData,whichApiRequest)
+            const response = await updateData(codigo,newData,whichApiRequest);
             if(response[1] !== 200){
                 M.toast({html: response[0], classes: 'rounded red'});
+                console.log(response)
             }else{
                 M.toast({html: response[0], classes: 'rounded green'})
                 setData(data.filter(datas => datas.codigo !== codigo));
+                console.log("funciona")
             }
         } catch (error) {   
             console.log(error);
