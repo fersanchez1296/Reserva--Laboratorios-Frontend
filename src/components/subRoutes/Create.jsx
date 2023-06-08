@@ -22,7 +22,7 @@ export const Create = () => {
     useEffect(()=> {
         const loadData = async () => {
             if (params.codigo){
-                const response = await loadSingleDataRequest(params.codigo);
+                const response = await loadSingleDataRequest(params.codigo,"adminTeacher");
                 setData({
                     rol_id : "",
                     codigo : response[0].codigo,
@@ -49,7 +49,7 @@ export const Create = () => {
         enableReinitialize={true}
         onSubmit={async(values,actions) => {
             if(params.codigo){
-                await updateSingleDataRequest(params.codigo,values);
+                await updateSingleDataRequest(params.codigo,values,"adminTeacher");
                 navigate("/Main/");
             }
             else{
@@ -104,6 +104,7 @@ export const Create = () => {
                         <label htmlFor='nombre'>Nombre</label>
                         <ErrorMessage name="password" component="div" />    
                     </div>
+
                     {/*input para escribir el primer apellido*/}
                     <div className="input-field col s6">
                         <i className="material-icons prefix">badge</i>
@@ -113,6 +114,7 @@ export const Create = () => {
                         <label htmlFor='apellido_1'>Apellido 1</label>
                         <ErrorMessage name="password" component="div" />    
                     </div>
+
                     {/*input para escribir el segundo apellido*/}
                     <div className="input-field col s6">
                         <i className="material-icons prefix">badge</i>
@@ -122,6 +124,7 @@ export const Create = () => {
                         <label htmlFor='apellido_2'>Apellido 2</label>
                         <ErrorMessage name="password" component="div" />    
                     </div>
+
                     {/*input para escribir el telefono*/}
                     <div className="input-field col s12">
                         <i className="material-icons prefix">phone</i>
@@ -131,6 +134,7 @@ export const Create = () => {
                         <label htmlFor='telefono'>Teléfono</label>
                         <ErrorMessage name="password" component="div" />    
                     </div>
+
                     {/*input para escribir el email*/}
                     <div className="input-field col s12">
                         <i className="material-icons prefix">alternate_email</i>
@@ -139,6 +143,7 @@ export const Create = () => {
                         <label htmlFor='email'>E-mail</label>
                         <ErrorMessage name="password" component="div" />    
                     </div> 
+
                     {/*Redirecciona al componente "AdminTeacher"*/} 
                     <NavLink to="/Main/">
                         <div className="input-field col s6">
@@ -147,6 +152,7 @@ export const Create = () => {
                             </button>
                         </div>  
                     </NavLink> 
+                    
                     {/*Botón para agregar o editar un nuevo usuario*/}
                     <div className="input-field col s6 add-btn">
                         <button type="submit" className='btn-small' disabled={isSubmitting}>

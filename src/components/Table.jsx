@@ -13,7 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle';
  * desde el componente invocador "AdminTeacher".
  * @returns 
  */
-export const Table = ({headers,data,whichData}) => {
+export const Table = ({headers,data,whichData,whichApiRequest}) => {
   /**
    * Hook personalizado relacionado con la adminitración de usuarios.
    * "deleteDataRequest" es la función declara en el componente "Context"
@@ -54,8 +54,17 @@ export const Table = ({headers,data,whichData}) => {
       case 1:
         navigate(`/Edit/Teacher/${itemEdit}`)
       break;
+      case 3:
+        navigate(`/Edit/Subject/${itemEdit}`)
+      break;
       case 4:
         navigate(`/Edit/Tool/${itemEdit}`)
+      break;
+      case 5:
+        navigate(`/Edit/Practice/${itemEdit}`)
+      break;
+      case 6:
+        navigate(`/Edit/Lab/${itemEdit}`)
       break;
       default:
         break;
@@ -115,7 +124,9 @@ export const Table = ({headers,data,whichData}) => {
                         {/*Asignación del codigo del usuario que se quiere eliminar
                         *en la variable codigo*
                         */}
-                        setItemDelete(Object.values(row)[0])}}
+                        setItemDelete(Object.values(row)[0])
+                        
+                      }}
                         ><span className="material-icons">delete</span>Eliminar</button>
                     </div>
                   </td>
@@ -147,7 +158,7 @@ export const Table = ({headers,data,whichData}) => {
                   {/*Confirmar eliminación*/}
                   <Button onClick={() => {
                     {/*Petición al backend*/}
-                    deleteDataRequest(itemDelete)
+                    deleteDataRequest(itemDelete,whichApiRequest)
                     {/*Cerrar dialogo*/}
                     handleClose()}}>Aceptar</Button>
                 </DialogActions>

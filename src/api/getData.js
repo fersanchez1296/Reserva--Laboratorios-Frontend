@@ -24,7 +24,9 @@ export const getData = async(whichApiRequest) =>{
  * en el objeto data.
  */
  export const getSingleData = async(item,whichApiRequest) =>{
+    console.log(item,whichApiRequest)
     const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/${whichApiRequest}/${item}`);
+    console.log(response)
     return(response.data);
 }
 /**
@@ -40,12 +42,12 @@ export const getData = async(whichApiRequest) =>{
  * El valor de retorno es la respuesta del backend almacenada en la variable "response" en 
  * en el objeto data.
  */
-export const deleteData = async(codigo) => {
-    const response = await axios.delete(`https://reserva-laboratorios-production.up.railway.app/adminTeacher/${codigo}`);
+export const deleteData = async(id,whichApiRequest) => {
+    const response = await axios.delete(`https://reserva-laboratorios-production.up.railway.app/${whichApiRequest}/${id}`);
     if(response.data !== ""){
         return ([response.data[0],response.data[1]]);
     }else{
-        return (["Usuario eliminado con exito",200]);
+        return (["Elemento eliminado con exito",200]);
     }
 }
 /**
@@ -62,10 +64,11 @@ export const deleteData = async(codigo) => {
  */
 export const createData = async(data,whichApiRequest) =>{
     const response = await axios.post(`https://reserva-laboratorios-production.up.railway.app/${whichApiRequest}`,data);
+    console.log(response)
     if(response.data !== ""){
-        return [response.data.message,response.data.errno]
-    }else{
         return (["Información agregada con exito",200]);
+    }else{
+        return [response.data.message,response.data.errno]
     }
 }
 /**
@@ -88,5 +91,36 @@ export const updateData = async(codigo,newData,whichApiRequest) =>{
         return ([response.data[0],response.data[1]]);
     }else{
         return (["Información modificada con exito",200]);
+    }
+}
+
+export const searchCarrera = async(carrera) => {
+    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/adminSubjects/${carrera}`);
+    if(response.data !== ""){
+        return (["Información encontrada",200,response.data]);
+    }else{
+        console.log(response.data)
+        return ([response.data[0],response.data[1]]);  
+    }
+}
+
+export const getAllCarreras = async() => {
+    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/adminSubjects-carreras`);
+    
+    if(response.data !== ""){
+        return (["Información encontrada",200,response.data]);
+    }else{
+        
+        return ([response.data[0],response.data[1]]);  
+    }
+}
+
+export const getAdmin = async(admin_code) => {
+    const response = await axios.get(`https://reserva-laboratorios-production.up.railway.app/adminLabs-adminUser/${admin_code}`);
+    if(response.data !== ""){
+        return (["Información encontrada",200,response.data]);
+    }else{
+        
+        return ([response.data[0],response.data[1]]);  
     }
 }
