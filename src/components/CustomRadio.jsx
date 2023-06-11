@@ -10,7 +10,8 @@ export const CustomRadio = ({data_icon,data_label_name,...props}) => {
             <span className='material-icons'>
                 {data_icon}
             </span>
-            <input {...field} {...props}/>
+            <input {...field} {...props} className={meta.touched && meta.error ? "input-error" : "input-correct"}/>
+            {meta.touched && meta.error && <div className="error">{meta.error}</div>}
             <span>
                 <p>{data_label_name}</p>
             </span>

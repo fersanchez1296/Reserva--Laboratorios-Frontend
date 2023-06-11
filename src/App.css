@@ -362,3 +362,9 @@ input.input-correct{
   text-align: left;
   margin-top: 0.25rem;
 }
+
+.input-field.with-btn{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

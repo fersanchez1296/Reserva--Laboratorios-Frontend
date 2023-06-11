@@ -31,7 +31,7 @@ export const FormAdminLab = ({data,id,adminI,searchAdmin}) => {
           {/* -------------------------------------------------------------------------- */
           /*                       input para escribir el edificio                      */
           /* -------------------------------------------------------------------------- */}
-          <div className="input-field col s12 m6 l12">
+          <div className="input-field col s12 m6 ">
             <CustomInput
               id="edificio"
               type="text"
@@ -51,7 +51,7 @@ export const FormAdminLab = ({data,id,adminI,searchAdmin}) => {
           /*                      input para escribir la capacidad                      */
           /* -------------------------------------------------------------------------- */}
 
-          <div className="input-field col s12 m6 l12">
+          <div className="input-field col s12 m6 ">
             <CustomInput
               id="capacidad"
               type="text"
@@ -71,7 +71,7 @@ export const FormAdminLab = ({data,id,adminI,searchAdmin}) => {
           {/* -------------------------------------------------------------------------- */
           /*                        input para escribir el nombre                       */
           /* -------------------------------------------------------------------------- */}
-          <div className="input-field col s12 ml6">
+          <div className="input-field col s12 m6">
             <CustomInput
               id="nombre"
               type="text"
@@ -87,7 +87,7 @@ export const FormAdminLab = ({data,id,adminI,searchAdmin}) => {
           {/* -------------------------------------------------------------------------- */
           /*         input para buscar al usuario administrador del laboratorio         */
           /* -------------------------------------------------------------------------- */}
-          <div className="input-field col s12 ml6">
+          <div className="input-field with-btn col s12 m6">
             <CustomInput
               id="admin"
               type="text"
@@ -100,7 +100,7 @@ export const FormAdminLab = ({data,id,adminI,searchAdmin}) => {
               data_tag="admin"
             />
             <button
-              className="btn-small"
+              className="btn-large"
               disabled={isSubmitting}
               type="button"
               onClick={() => searchAdmin(values.admin)}

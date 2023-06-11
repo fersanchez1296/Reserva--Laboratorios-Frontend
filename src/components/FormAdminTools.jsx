@@ -72,7 +72,7 @@ export const FormAdminTools = ({data,id}) => {
                   className="validate textarea"
                   name="descripcion"
                   onChange={handleChange}
-                  required
+                  
                   value={values.descripcion}
                 ></textarea>
                 <label htmlFor="description">Descripción</label>

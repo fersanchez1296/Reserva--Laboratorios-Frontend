@@ -4,6 +4,9 @@ const regexNombre =  /^[\p{L}\s]+$/u;
 const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const adminTeacherSchema = yup.object().shape({
+  rol_id : yup
+  .string()
+  .required("Seleciona una opción"),
   codigo: yup
     .number()
     .min(1, "El código debe tener al menos 1 dígito")
@@ -36,8 +39,7 @@ export const adminTeacherSchema = yup.object().shape({
     .required("Este campo es necesario"),
   telefono: yup
     .number()
-    .min(10, "El número telefónico debe contener 10 dígitos")
-    .max(10, "El número telefónico debe contener 10 dígitos")
+    .min(1, "El número telefónico debe contener 10 dígitos")
     .positive("Debes ingresar solo números positivos")
     .integer("Debes ingresar solo números sin punto decimal")
     .required("Este campo es necesario"),
