@@ -45,7 +45,7 @@ export const Main = () => {
     )
   }
   return (
-    <div>
+    <div className="display">
       {/*Botón que despliega el menú con el método onCLick, se pasa la referencia
        *del componente a la función "showMenu() a traves de la variable
        *"btnMenu". */}
