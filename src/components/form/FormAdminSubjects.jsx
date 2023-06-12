@@ -1,10 +1,25 @@
 import React, { useRef } from "react";
-import { useContextReservations } from "./context/Context.jsx";
-import { CustomInput } from "./CustomInput.jsx";
+import { useContextReservations } from "../context/Context.jsx";
+import { CustomInput } from "../CustomInput.jsx";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { Buttons } from "./Buttons.jsx";
-import { adminSubjectsSchema } from "../schemas/adminSubjectsSchemas.js";
+import { Buttons } from "../Buttons.jsx";
+import { adminSubjectsSchema } from "../../schemas/adminSubjectsSchemas.js";
+import { inputs } from '../../data/adminSubjectData.js';
+
+const renderInputs = (values, handleChange) => {
+  const el = inputs(values);
+  return el.map((elemento, index) => (
+    <div className={elemento.size} key={index}>
+      <CustomInput
+        key={index}
+        onChange={handleChange}
+        onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
+        {...elemento}
+      />
+    </div>
+  ));
+};
 export const FormAdminSubjects = ({
   data,
   crn,
@@ -36,58 +51,7 @@ export const FormAdminSubjects = ({
       {({ handleChange, handleSubmit, isSubmitting, values }) => (
         <Form onSubmit={handleSubmit}>
           <div className="row">
-            {/* -------------------------------------------------------------------------- */
-            /*                         input para escribir el crn                         */
-            /* -------------------------------------------------------------------------- */}
-            <div className="input-field col s12 m6 l12">
-              <CustomInput
-                id="crn"
-                type="text"
-                className="validate"
-                name="crn"
-                onChange={handleChange}
-                value={values.crn}
-                data_label_name="CRN"
-                data_icon="handyman"
-                data_tag="crn"
-                onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
-              />
-            </div>
-            {/* -------------------------------------------------------------------------- */
-            /*                        input para escribir la clave                        */
-            /* -------------------------------------------------------------------------- */}
-            <div className="input-field col s12 m6 l12">
-              <CustomInput
-                id="clave"
-                type="text"
-                className="validate"
-                name="clave"
-                onChange={handleChange}
-                value={values.clave}
-                data_label_name="Clave"
-                data_icon="handyman"
-                data_tag="clave"
-                onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
-              />
-            </div>
-
-            {/* -------------------------------------------------------------------------- */
-            /*                        input para escribir el nombre                       */
-            /* -------------------------------------------------------------------------- */}
-            <div className="input-field col s12 ml6">
-              <CustomInput
-                id="nombre"
-                type="text"
-                className="validate"
-                name="nombre"
-                onChange={handleChange}
-                value={values.nombre}
-                data_label_name="Nombre"
-                data_icon="123"
-                data_tag="nombre"
-              />
-            </div>
-
+            {renderInputs(values,handleChange)}
             {/* -------------------------------------------------------------------------- */
             /*                        select para buscar la carrera                        */
             /* -------------------------------------------------------------------------- */}

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useContextReservations } from "../context/Context.jsx";
 import { useParams } from "react-router-dom";
-import { FormAdminSubjects } from "../FormAdminSubjects.jsx";
+import { FormAdminSubjects } from "../form/FormAdminSubjects.jsx";
+import { LoadingScreen } from "../LoadingScreen";
 
 export const CreateSubjects = () => {
+  const [loading, setLoading] = useState(false);
   const { loadSingleDataRequest, getGrupos, getCarreras } =
     useContextReservations();
   const params = useParams();
@@ -28,6 +30,7 @@ export const CreateSubjects = () => {
         });
         loadCarrera();
       }
+      setLoading(true)
     };
     loadData();
 
@@ -46,18 +49,20 @@ export const CreateSubjects = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="title-action-component">
         <h1>{params.crn ? "Editar Materia" : "Crear Materia"}</h1>
       </div>
-      <FormAdminSubjects
+      {loading ?  <FormAdminSubjects
         data={data}
         crn={params.crn}
         searchGrupos={searchGrupos}
         carrera_n={carrera_n}
         grupos={grupos}
         id_grupo={id_grupo}
-      />
-    </div>
+      /> : <LoadingScreen/>}
+
+      
+    </>
   );
 };

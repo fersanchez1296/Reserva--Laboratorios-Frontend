@@ -4,7 +4,7 @@ const regexNombre =  /^[\p{L}\s]+$/u;
 export const adminToolsSchema = yup.object().shape({
     nombre : yup
     .string()
-    .min(10, "El nombre debe tener al menos 10 caractéres")
+    .min(2, "El nombre debe tener al menos 2 caractéres")
     .matches(regexNombre, {message :"Por favor revisa que tu nombre no contenga números o caractéres especiales"})
     .required("Este campo es requerido"),
     cantidad :  yup

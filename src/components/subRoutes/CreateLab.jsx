@@ -1,9 +1,11 @@
 import React, { useEffect,useState } from "react";
 import { useContextReservations } from "../context/Context.jsx";
 import { useParams} from "react-router-dom";
-import { FormAdminLab } from "../FormAdminLab.jsx";
+import { FormAdminLab } from "../form/FormAdminLab.jsx";
+import { LoadingScreen } from "../LoadingScreen";
 
 export const CreateLab = () => {
+  const [loading, setLoading] = useState(false);
   const {loadSingleDataRequest,getAdminRequest } =useContextReservations();
   const params = useParams();
   const [adminI,setAdmin] = useState("");
@@ -37,6 +39,7 @@ export const CreateLab = () => {
         });
         searchAdmin(response[0].usuario_codigo)
       }
+      setLoading(true)
     };
     loadData();
     
@@ -46,11 +49,12 @@ export const CreateLab = () => {
 
   //TODO: Crear validaciones para los campos del formulario.
   return (
-    <div>
+    <>
       <div className="title-action-component">
         <h1>{params.id ? "Editar Laboratorio" : "Crear Laboratorio"}</h1>
       </div>
-      <FormAdminLab data={data} id={params.id} adminI={adminI} searchAdmin={searchAdmin}/>
-    </div>
+      {loading ?  <FormAdminLab data={data} id={params.id} adminI={adminI} searchAdmin={searchAdmin}/> : <LoadingScreen/>}
+      
+    </>
   );
 };

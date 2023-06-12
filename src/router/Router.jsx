@@ -20,7 +20,7 @@ export const Router = () => {
           {/*Componente Main*/}
           <Route path='/Main/*' element={<Main/>}>
             {/*Componente AdminTeacher*/}
-            <Route path='View' element={<View />} /> 
+            <Route path='View/:element' element={<View />} /> 
           </Route>
           {/*Componente Crear Usuario*/} 
           <Route path='/Create/Teacher' element={<Create/>} /> 

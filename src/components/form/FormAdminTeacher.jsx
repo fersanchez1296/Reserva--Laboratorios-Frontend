@@ -1,24 +1,36 @@
 import React from "react";
-import { CustomInput } from "./CustomInput.jsx";
-import { CustomRadio } from "./CustomRadio.jsx";
+import { CustomInput } from "../CustomInput.jsx";
+import { CustomRadio } from "../CustomRadio.jsx";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useContextReservations } from "./context/Context.jsx";
-import { adminTeacherSchema } from "../schemas/adminTeacherSchema.js";
-import { Buttons } from "./Buttons.jsx";
-import { elementos } from "../data/adminTeacherData.js";
+import { useContextReservations } from "../context/Context.jsx";
+import { adminTeacherSchema } from "../../schemas/adminTeacherSchema.js";
+import { Buttons } from "../Buttons.jsx";
+import { elementos, radios } from "../../data/adminTeacherData.js";
 
-const renderInputs = (values,handleChange) => {
-  const el = elementos(values)
+{
+  /* -------------------------------------------------------------------------- */
+  /*              funcion encargada de renderizar los radio buttons             */
+  /* -------------------------------------------------------------------------- */
+}
+const renderRadios = () => {
+  const rd = radios();
+  return rd.map((r, index) => <CustomRadio key={index} type="radio" {...r} />);
+};
+{
+  /* -------------------------------------------------------------------------- */
+  /*                 funcion encargada de renderizar los inputs                 */
+  /* -------------------------------------------------------------------------- */
+}
+const renderInputs = (values, handleChange) => {
+  const el = elementos(values);
   return el.map((elemento, index) => (
     <div className={elemento.size} key={index}>
       <CustomInput
         key={index}
         type="text"
         onChange={handleChange}
-        onInput={(e) =>
-          (e.target.value = e.target.value.toUpperCase())
-        }
+        onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
         {...elemento}
       />
     </div>
@@ -55,30 +67,13 @@ export const FormAdminTeacher = ({ data, codigo }) => {
             aria-labelledby="type-user-group"
             className="radios-container"
           >
-            <CustomRadio
-              type="radio"
-              name="rol_id"
-              value="1"
-              data_icon="admin_panel_settings"
-              data_label_name="Admin"
-            />
-            <CustomRadio
-              type="radio"
-              name="rol_id"
-              value="2"
-              data_icon="school"
-              data_label_name="Profesor"
-            />
-            <CustomRadio
-              type="radio"
-              name="rol_id"
-              value="3"
-              data_icon="class"
-              data_label_name="Estudiante"
-            />
+            {renderRadios()}
           </div>
+          {/* -------------------------------------------------------------------------- */
+            /*                                                          Inputs              */
+            /* -------------------------------------------------------------------------- */}
           <div className="row">
-            {renderInputs(values,handleChange)}
+            {renderInputs(values, handleChange)}
             {/* -------------------------------------------------------------------------- */
             /*                Botón para agregar o editar un nuevo usuario                */
             /* -------------------------------------------------------------------------- */}

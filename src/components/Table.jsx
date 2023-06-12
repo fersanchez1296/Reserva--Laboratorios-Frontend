@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import { useContextReservations } from './context/Context.jsx';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -14,6 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
  * @returns 
  */
 export const Table = ({headers,data,whichData,whichApiRequest}) => {
+  const params = useParams()
   /**
    * Hook personalizado relacionado con la adminitración de usuarios.
    * "deleteDataRequest" es la función declara en el componente "Context"
@@ -50,20 +51,20 @@ export const Table = ({headers,data,whichData,whichApiRequest}) => {
   };
 
   const edit = (itemEdit) => {
-    switch (whichData) {
-      case 1:
+    switch (params.element) {
+      case "adminTeacher":
         navigate(`/Edit/Teacher/${itemEdit}`)
       break;
-      case 3:
+      case "adminSubjects":
         navigate(`/Edit/Subject/${itemEdit}`)
       break;
-      case 4:
+      case "adminTools":
         navigate(`/Edit/Tool/${itemEdit}`)
       break;
-      case 5:
+      case "adminPractices":
         navigate(`/Edit/Practice/${itemEdit}`)
       break;
-      case 6:
+      case "adminLabs":
         navigate(`/Edit/Lab/${itemEdit}`)
       break;
       default:

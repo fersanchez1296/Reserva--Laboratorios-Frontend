@@ -1,9 +1,11 @@
 import React, { useEffect,useState } from "react";
-import { FormAdminPractice } from "../FormAdminPractice.jsx";
+import { FormAdminPractice } from "../form/FormAdminPractice.jsx";
 import { useContextReservations } from "../context/Context.jsx";
-import { NavLink, useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
+import { LoadingScreen } from "../LoadingScreen";
 
 export const CreatePractice = () => {
+  const [loading, setLoading] = useState(false);
   const {
     loadSingleDataRequest,
   } = useContextReservations();
@@ -25,17 +27,20 @@ export const CreatePractice = () => {
           descripcion: response[0].descripcion,
         });
       }
+      setLoading(true)
     };
     loadData();
   }, []);
 
   //TODO: Crear validaciones para los campos del formulario.
   return (
-    <div>
+    <>
       <div className="title-action-component">
         <h1>{params.id ? "Editar Práctica" : "Crear Práctica"}</h1>
       </div>
-        <FormAdminPractice data={data} id={params.id}/>
-    </div>
+      {loading ?  <FormAdminPractice data={data} id={params.id}/> : <LoadingScreen/>}
+
+        
+    </>
   );
 };

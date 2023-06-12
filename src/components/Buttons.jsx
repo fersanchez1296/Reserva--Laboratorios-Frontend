@@ -1,11 +1,13 @@
 import React from 'react'
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export const Buttons = ({isSubmitting}) => {
+  const navigate = useNavigate();
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   return (
     <div className="input-field col s12 btns">
-    <NavLink to="/Main/">
-      <button className="btn-large red">Cancelar</button>
-    </NavLink>
+    <button className="btn-large red" onClick={handleGoBack} type='button'>Cancelar</button>
     <button
       type="submit"
       className="btn-large"

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useContextReservations } from "../context/Context.jsx";
 import { useParams } from "react-router-dom";
-import { FormAdminTeacher } from "../FormAdminTeacher.jsx";
+import { FormAdminTeacher } from "../form/FormAdminTeacher.jsx";
+import { LoadingScreen } from "../LoadingScreen";
 
 export const Create = () => {
+  const [loading, setLoading] = useState(false);
   const { loadSingleDataRequest } = useContextReservations();
   const params = useParams();
-
   const [data, setData] = useState({
     rol_id: "",
     codigo: "",
@@ -34,17 +35,18 @@ export const Create = () => {
           email: response[0].email,
         });
       }
+      setLoading(true)
     };
     loadData();
   }, []);
 
   //TODO: Crear validaciones para los campos del formulario.
   return (
-    <div>
+    <>
       <div className="title-action-component">
         <h1>{params.codigo ? "Editar Usuario" : "Crear Usuario"}</h1>
       </div>
-      <FormAdminTeacher data={data} codigo={params.codigo} />
-    </div>
+      {loading ?  <FormAdminTeacher data={data} codigo={params.codigo}/> : <LoadingScreen/>}
+    </>
   );
 };

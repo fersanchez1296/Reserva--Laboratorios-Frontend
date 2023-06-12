@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useContextReservations } from "../context/Context.jsx";
 import { useParams } from "react-router-dom";
-import { FormAdminTools } from "../FormAdminTools.jsx";
+import { FormAdminTools } from "../form/FormAdminTools.jsx";
+import { LoadingScreen } from "../LoadingScreen";
 
 export const CreateTools = () => {
+  const [loading, setLoading] = useState(false);
   const {loadSingleDataRequest} = useContextReservations();
   const params = useParams();
   
@@ -25,16 +27,17 @@ export const CreateTools = () => {
           cantidad: response[0].cantidad,
         });
       }
+      setLoading(true)
     };
     loadData();
   }, []);
 
   return (
-    <div>
+    <>
       <div className="title-action-component">
         <h1>{params.id ? "Editar Equipo" : "Crear Equipo"}</h1>
       </div>
-        <FormAdminTools data={data} id={params.id}/>
-    </div>
+      {loading ?  <FormAdminTools data={data} id={params.id}/> : <LoadingScreen/>}
+    </>
   );
 };
